@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<!-- 
+		sessionFactory代表一个数据库的描述
+	 -->
+<session-factory>
+	<property name="connection.password">root</property>
+	<property name="connection.username">root</property>
+
+	<property name="hibernate.connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+
+	<property name="hibernate.connection.url">
+		jdbc:mysql://localhost:3306/oa_a
+	</property>
+
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5InnoDBDialect
+	</property>
+
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- 
+		引入映射文件
+	-->
+	<property name="show_sql">true</property>
+	<property name="format_sql">true</property>
+
+	<mapping resource="cn/wang/oaA/domain/Person.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/system/Department.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/system/Role.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/system/User.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/menuitem/Menuitem.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/system/Privilege.hbm.xml" />
+	
+    <mapping resource="jbpm.repository.hbm.xml" />
+    <mapping resource="jbpm.execution.hbm.xml" />
+    <mapping resource="jbpm.history.hbm.xml" />
+    <mapping resource="jbpm.task.hbm.xml" />
+    <mapping resource="jbpm.identity.hbm.xml" />
+    
+    <mapping resource="cn/wang/oaA/domain/workflow/Approve.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/workflow/Form.hbm.xml" />
+	<mapping resource="cn/wang/oaA/domain/workflow/FormTemplate.hbm.xml" />
+</session-factory>
+</hibernate-configuration>

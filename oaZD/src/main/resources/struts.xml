@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.ui.theme" value="simple"/>
+	<include file="struts/struts-person.xml"></include>
+	<include file="struts/struts-department.xml"></include>
+	<include file="struts/struts-role.xml"></include>
+	<include file="struts/struts-user.xml"></include>
+	<include file="struts/struts-menuitem.xml"></include>
+	<include file="struts/struts-privilege.xml"></include>
+	<include file="struts/struts-login.xml"></include>
+	<include file="struts/struts-forward.xml"></include>
+	<include file="struts/struts-workflow.xml"></include>
+	
+	<!-- 功能权限拦截器 配合自定义注解  -->
+	<package name="privilegeOA" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="privilegeInterceptor" class="cn.wang.oaA.interceptor.privilege.PrivilegeInterceptor"></interceptor>
+			<interceptor-stack name="oaStack">
+				<interceptor-ref name="privilegeInterceptor"></interceptor-ref><!-- 把自定义的权限拦截器放在第一个 -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="oaStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="privilegeError">WEB-INF/jsp/error.jsp</result>
+		</global-results>
+		
+	</package>
+	
+	<!-- struts2全局异常处理  -->
+	<package name="struts-global" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="errHandler" type="chain">
+				<param name="actionName">errorProcessor</param>
+			</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="errHandler" />
+		</global-exception-mappings>
+
+		<action name="errorProcessor" class="cn.wang.oaA.exception.MyException">
+			<result name="error">WEB-INF/jsp/error.jsp</result>
+		</action>
+		 
+	</package>
+	 
+</struts>

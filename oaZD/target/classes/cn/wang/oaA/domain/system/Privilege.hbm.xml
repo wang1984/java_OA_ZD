@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.wang.oaA.domain.system.Privilege">
+		<id name="id" length="5">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="pid" length="5"></property>
+		
+		<property name="isParent"></property>
+		
+		<property name="url" length="100"></property>
+		
+		<property name="target" length="20"></property>
+		
+		<property name="icon" length="100"></property>
+		<property name="name" length="20"></property>
+		
+		<property name="flag" length="1"></property>
+		
+		<property name="checked"></property>
+		 
+		<set name="roles" table="role_privilege">
+			<key>
+				<column name="id"></column>
+			</key>
+			<many-to-many class="cn.wang.oaA.domain.system.Role" column="rid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

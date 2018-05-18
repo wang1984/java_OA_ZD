@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="pdmanager" namespace="/" extends="struts-default">
+		<action name="pdManagerAction_*" method="{1}" class="pdManagerAction">
+			<result name="pdList">WEB-INF/jsp/workflow/pdmanager/list.jsp</result>
+			<result name="deployUI">WEB-INF/jsp/workflow/pdmanager/deployUI.jsp</result>
+			<result name="action2action" type="redirectAction">pdManagerAction_showLasterVersions.action</result>
+			<result type="stream"></result>
+		</action>
+	</package>
+	
+	<package name="formTemplate" namespace="/" extends="struts-default">
+		<action name="formTemplateAction_*" method="{1}" class="formTemplateAction">
+			<result name="listAction">WEB-INF/jsp/workflow/formTemplate/list.jsp</result>
+			<result name="addUI">WEB-INF/jsp/workflow/formTemplate/addUI.jsp</result>
+			<result name="action2action" type="redirectAction">formTemplateAction_showAllFormTemplate.action</result>
+			<result name="download" type="stream">
+				<!-- 
+					输入流的名字
+					   用来获取inputStream
+				-->
+				<param name="inputName">inputStream</param>
+				<!-- 名称的名字 -->
+				<param name="contentDisposition">
+					<!-- 
+						应用ognl表达式动态显示要下载的文件的名字
+					-->
+					attachment;filename="${#fileName}.doc"
+				</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="workflow" namespace="/" extends="struts-default">
+		<action name="workFlowAction_*" method="{1}" class="workFlowAction">
+			<result name="formTemplateList">WEB-INF/jsp/workflow/workflow/formTemplateList.jsp</result>
+			<result name="submitUI">WEB-INF/jsp/workflow/workflow/submitUI.jsp</result>
+			<result name="taskList">WEB-INF/jsp/workflow/workflow/taskList.jsp</result>
+		</action>
+	</package>
+</struts>

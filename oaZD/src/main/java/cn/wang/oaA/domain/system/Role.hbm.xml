@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.wang.oaA.domain.system.Role">
+		<id name="rid" length="5">
+			<generator class="increment"></generator>
+		</id>
+		<property name="pid" length="5"></property>
+		<property name="name" length="20"></property>
+		<property name="description" length="20"></property>
+		<property name="checked"></property>
+		
+		<set name="users" table="user_role">
+			<key>
+				<column name="rid"></column>
+			</key>
+			<many-to-many class="cn.wang.oaA.domain.system.User" column="uid"></many-to-many>
+		</set>
+		<set name="privileges" table="role_privilege">
+		 	<key>
+		 	  <column name="rid"></column>
+		 	</key>
+		 	<many-to-many class="cn.wang.oaA.domain.system.Privilege" column="id"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

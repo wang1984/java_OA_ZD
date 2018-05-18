@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.wang.oaA.domain.workflow.Approve">
+		<id name="aid" length="5">
+			<generator class="increment"></generator>
+		</id>
+		<property name="approvename" length="20"></property>
+		<property name="approvetime"></property>
+		<property name="isapprove"></property>
+		<many-to-one name="form" class="cn.wang.oaA.domain.workflow.Form" column="fid"></many-to-one>
+	</class>
+</hibernate-mapping>
